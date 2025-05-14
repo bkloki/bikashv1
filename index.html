@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Developer Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+  <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+  <style>
+    :root {
+      --pink: #d53075;
+      --mint: #00e317;
+      --lavender: #ffd500;
+      --peach: #ffcb9a;
+      --yellow: #fdfd96;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #000000;
+      color: #fcf1f1;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    [data-scroll-container] {
+      overflow: hidden;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 80px 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: transparent !important;
+    }
+
+    .hero {
+      text-align: center;
+    }
+
+    .about img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 4px solid rgb(255, 255, 255);
+      box-shadow: 0 8px 20px rgb(0, 0, 0);
+      margin-bottom: 20px;
+      margin-top: 90px;
+      box-shadow: 0 0 20px white;
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      color: #fffefe;
+      text-shadow: 0 0 50px white;
+    }
+
+    .hero p {
+      font-size: 1.8rem;
+      color: #fff9f9;
+      margin-top: 10px;
+      text-shadow: 0 0 10px white;
+    }
+
+    .about {
+      text-align: center;
+      padding: 100px 10vw;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      max-width: 800px;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      background-color: #fcf1f1;
+      color: #000000;
+      padding: 80px;
+      border-radius: 5%;
+    }
+
+    .projects {
+      padding: 100px 10vw;
+    }
+
+    .projects h2 {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 0 0 50px yellow;
+
+    }
+
+    .project-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.project-slider {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+    .project-card {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 50px;
+      width: 650px;
+      height: 500px;
+      color: #000000;
+      font-size: 15px;
+    }
+
+    .project-card:hover {
+      transform: scale(1.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    canvas#bgCanvas,
+    canvas#zdogCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      pointer-events: none;
+    }
+    .custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: var(--pink);
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: background 0.3s ease, transform 0.1s ease;
+  transform: translate(-50%, -50%);
+}
+.ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--mint);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple-animation 0.6s ease-out forwards;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0;
+  }
+}
+
+
+  </style>
+</head>
+
+<body data-scroll-container>
+  <div class="custom-cursor"></div>
+
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="zdogCanvas"></canvas>
+  <canvas id="zdogCanvas"></canvas>
+
+
+  <section class="hero" data-scroll-section>
+    
+    <h1>BIKASH BEHERA</h1>
+    <p>Creative Frontend Developer</p>
+  </section>
+
+  <section class="about" data-scroll-section>
+    <h2>Know more about me</h2>
+    <p>I'm a frontend developer who genuinely enjoys building clean, thoughtful interfaces that feel good to use. I care a lot about the small details — smooth animations, crisp layouts, and interactions that make a site feel alive without being overwhelming. My focus is on creating responsive, accessible, and engaging experiences using modern tools like React, Tailwind, and a good dose of JavaScript. I’m always exploring ways to make the web more enjoyable, whether that’s through better performance, creative UI ideas, or just making something that works really well across different screens. For me, it’s about crafting experiences that people actually enjoy using.
+    </p>
+    <img src="./profilepic.png" alt="Profile Photo" />
+  </section>
+
+  <section class="projects" data-scroll-section>
+    <h2>Projects</h2>
+    <div class="project-slider">
+       <div onclick="location.href='./codey.html'"  traget = "_blank" class="project-card" style="background-image: url('./six.jpg');">click for more details</div>
+      <div onclick="location.href='./freshroots.html'"  traget = "_blank" class="project-card" style="background-image: url('./one.jpg');">click for more details</div>
+      <div onclick="location.href='./forevercaptured.html'"  traget = "_blank" class="project-card" style="background-image: url('./two.jpg') ;">click for more details</div>
+      <div onclick="location.href='./educark.html'"  traget = "_blank"class="project-card" style="background-image: url('./three.jpg');">click for more details</div>
+      <div onclick="location.href='./shoeflex.html'"  traget = "_blank" class="project-card" style="background-image: url('./four.jpg');">click for more details</div>
+      <div   onclick="location.href='./paws&wishkers.html'"  traget = "_blank"class="project-card" style="background-image: url('./five.jpg');">click for more details</div>
+     
+
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <script>
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector('[data-scroll-container]'),
+      smooth: true
+    });
+  </script>
+
+  <!-- Particle Background -->
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const mouse = { x: null, y: null };
+
+    class Particle {
+      constructor() {
+        this.reset();
+        this.baseSize = this.size;
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 12 + 1;
+        this.speedX = Math.random() * 0.7 - 0.5;
+        this.speedY = Math.random() * 0.6 - 0.5;
+        this.color = `hsla(${Math.random() * 360}, 100%, 50%, 1)`;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 100) {
+          this.size = this.baseSize + (120 - distance) / 10;
+        } else {
+          this.size = this.baseSize;
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 5, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+      
+    }
+
+    function initParticles(count) {
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    initParticles(900);
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles(800);
+    });
+  </script>
+
+  <!-- Zdog 3D Animated Shapes -->
+  <script>
+    const zdogCanvas = document.getElementById('zdogCanvas');
+    const illo = new Zdog.Illustration({
+      element: zdogCanvas,
+      dragRotate: true,
+      resize: true,
+      zoom: 5,
+    });
+
+    const anchor = new Zdog.Anchor({ addTo: illo });
+    const anchor2 =  new Zdog.Anchor({ addTo: illo });
+
+    new Zdog.Box({
+      addTo: anchor,
+      width: 60,
+      height: 60,
+      depth: 60,
+      stroke: false,
+      color: '#fdfd96',
+      leftFace: '#ffcb9a',
+      rightFace: '#b9fbc0',
+      topFace: '#f8c8dc',
+      bottomFace: '#e4c1f9',
+      translate: { x: -100, y: -50 },
+    });
+
+    new Zdog.Box({
+      addTo: anchor2,
+      width: 40,
+      height: 40,
+      depth: 60,
+      stroke: false,
+      color: '#fdfd96',
+      leftFace: '#ffcb9a',
+      rightFace: '#b9fbc0',
+      topFace: '#f8c8dc',
+      bottomFace: '#e4c1f9',
+      translate: { x: -100, y: -50 },
+    });
+    new Zdog.Cone({
+      addTo: anchor,
+      diameter: 40,
+      length: 80,
+      stroke: false,
+      color: '#e4c1f9',
+      backface: '#b9fbc0',
+      translate: { x: 100, y: 50 },
+    });
+
+    function animate() {
+      anchor.rotate.y += 0.01;
+      anchor.rotate.x += 0.005;
+      anchor2.rotate.x += 0.018;
+      illo.updateRenderGraph();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+  <script>
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0, mouseY = 0;
+    let posX = 0, posY = 0;
+  
+    function animateCursor() {
+      posX += (mouseX - posX) * 0.5;
+      posY += (mouseY - posY) * 0.5;
+      cursor.style.transform = `translate(${posX}px, ${posY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+  
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+  
+    animateCursor();
+  </script>
+  <script>
+    document.addEventListener('click', function(e) {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      document.body.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+    
+  </script>
+  
+</body>
+
+</html>

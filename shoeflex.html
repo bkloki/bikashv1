@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Explanation</title>
+  <style>
+    :root {
+      --pink: #f8c8dc;
+      --mint: #b9fbc0;
+      --lavender: #e4c1f9;
+      --peach: #ffcb9a;
+      --yellow: #fdfd96;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #000000;
+      color: #000000;
+      overflow-x: hidden;
+      padding: 40px;
+    }
+
+    canvas#bgCanvas,
+    canvas#zdogCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #fff3f3;
+      text-shadow: 0 0 20px ;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #fffdfd;
+    }
+
+    .section p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      color: #fffcfc;
+      text-shadow: 0 0 10px black;
+      background-color: rgb(0, 0, 0);
+      padding: 20px;
+    }
+
+    .media {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .media img,
+    .media video {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-link a {
+      color: #fff;
+      background: var(--peach);
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 1s ease;
+    }
+
+    .project-link a:hover {
+      background: var(--yellow);
+      color: #1306ff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="zdogCanvas"></canvas>
+  <a  href="index.html" style="text-decoration: none; font-size: 35px; color: wheat;" >back</a>
+
+  <header>
+    <h1>ShoeFlex</h1>
+  </header>
+
+  <div class="section">
+    <h2>Description</h2>
+    <p>
+
+     shoeflex is a responsive, performance-optimized organic e commerce website built with modern front-end technologies. The UI is crafted using  CSS, enabling fast styling with utility-first classes and a clean, scalable design system. The layout is mobile-first and fully responsive, using CSS grid and flexbox for seamless adaptability across devices.
+      
+      Key features include:
+      
+      Sticky, interactive navbar with Lucide icons for accessibility and visual clarity.
+      
+      A hero section with a promotional message, search bar, and responsive image layout.
+      
+      Modular sections like product catalogs and customer testimonials, each with a consistent component-based structure.
+      
+      Animated counters using JavaScript to dynamically reflect live customer stats.
+      
+      Integration-ready sections for payment gateways and real-time delivery tracking.
+      
+      Enhanced UI with hover states, transitions, and rounded elements for a friendly, organic feel.
+      
+      Social media icons integrated using FontAwesome, with semantic HTML and ARIA-friendly practices.
+      
+      This project demonstrates strong front-end architecture with emphasis on performance, maintainability, and modern UX patterns.</p>
+  </div>
+
+  <div class="section">
+    <h2>Live Link</h2>
+    <p style="background-color: #00000000;" class=""><a href="https://bkloki.github.io/ShoeFlex/" target="_blank">View Project</a></p>
+  </div>
+
+ 
+
+  <div class="section">
+    <h2>Screenshots</h2>
+    <div class="media">
+      <img src="./Shoe Store - Hero - Google Chrome 07-05-2025 00_31_37.png" alt="Screenshot 1">
+      <img src="./Shoe Store - Hero - Google Chrome 07-05-2025 00_31_53.png" alt="Screenshot 2">
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const mouse = { x: null, y: null };
+
+    class Particle {
+      constructor() {
+        this.reset();
+        this.baseSize = this.size;
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 12 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `hsla(${Math.random() * 360}, 100%, 50%, 1)`;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 100) {
+          this.size = this.baseSize + (100 - distance) / 10;
+        } else {
+          this.size = this.baseSize;
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function initParticles(count) {
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    initParticles(100);
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles(100);
+    });
+
+    // Zdog 3D Shapes
+    const zdogCanvas = document.getElementById('zdogCanvas');
+    const illo = new Zdog.Illustration({
+      element: zdogCanvas,
+      dragRotate: true,
+      resize: true,
+      zoom: 15,
+    });
+
+    const anchor = new Zdog.Anchor({ addTo: illo });
+
+    new Zdog.Box({
+      addTo: anchor,
+      width: 60,
+      height: 60,
+      depth: 60,
+      stroke: false,
+      color: '#fdfd96',
+      leftFace: '#ffcb9a',
+      rightFace: '#b9fbc0',
+      topFace: '#f8c8dc',
+      bottomFace: '#e4c1f9',
+      translate: { x: -100, y: -50 },
+    });
+
+    new Zdog.Cone({
+      addTo: anchor,
+      diameter: 40,
+      length: 80,
+      stroke: false,
+      color: '#e4c1f9',
+      backface: '#b9fbc0',
+      translate: { x: 100, y: 50 },
+    });
+
+    function animate() {
+      anchor.rotate.y += 0.01;
+      anchor.rotate.x += 0.005;
+      illo.updateRenderGraph();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+
+</html>
